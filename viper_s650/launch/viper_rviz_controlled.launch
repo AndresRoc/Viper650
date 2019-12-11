@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<launch>
+	
+  <include file="$(find viper_description)/launch/load_viper_s650.launch" />
+  <rosparam file="$(find viper_s650)/config/ViperTrajectoryControl.yaml" command="load"/>
+  
+  <!-- <arg name="robot_ip" doc="IP of the controller" />
+  <param name="/robot_ip_address" type="str" value="127.0.0.1"/>
+ -->
+  <!-- copy the specified IP address to the Parameter Server, for use by nodes below -->
+<!-- 
+  <node pkg="industrial_robot_simulator" type="industrial_robot_simulator" name="industrial_robot_simulator"/> -->
+  
+  <!-- joint_trajectory_action: provides actionlib interface for high-level robot control -->
+
+  <node pkg="industrial_robot_client" type="joint_trajectory_action" name="joint_trajectory_action"/>
+
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" /> 
+
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find industrial_robot_client)/config/robot_state_visualize.rviz" required="true" />
+
+</launch>

@@ -1,0 +1,50 @@
+viper:
+    # Publish joint states
+    joint_state_controller:
+        type: joint_state_controller/JointStateController
+        publish_rate: 50
+
+    arm_controller:
+        type: position_controllers/JointTrajectoryController
+        joints:
+            - joint_1
+            - joint_2
+            - joint_3
+            - joint_4
+            - joint_5
+            - joint_6
+
+        constraints:
+            goal_time: 10.0
+            joint_1: { trjectory: 0.1, goal: 0.1 }
+            joint_2: { trjectory: 0.1, goal: 0.1 }
+            joint_3: { trjectory: 0.1, goal: 0.1 }
+            joint_4: { trjectory: 0.1, goal: 0.1 }
+            joint_5: { trjectory: 0.1, goal: 0.1 }
+            joint_6: { trjectory: 0.1, goal: 0.1 }
+
+        gains:
+            joint_1: { p: 12000, d: 50, i: 0.0, i_clamp: 10000 }
+            joint_2: { p: 30000, d: 100, i: 0.02, i_clamp: 10000 }
+            joint_3: { p: 18000, d: 50, i: 0.01, i_clamp: 1 }
+            joint_4: { p: 18000, d: 70, i: 0.01, i_clamp: 10000 }
+            joint_5: { p: 12000, d: 70, i: 0.01, i_clamp: 1 }
+            joint_6: { p: 7000, d: 50, i: 0.01, i_clamp: 1 }
+ 
+
+        state_publish_rate: 50
+
+    gripper_controller:
+        type: position_controllers/JointTrajectoryController
+        joints:
+            - joint_6-tool0
+        constraints:
+            goal_time: 10.0
+            joint_6: { trjectory: 0.1, goal: 0.1 }
+
+        gains:
+            joint_6-tool0: { p: 5, d: 3.0, i: 0, i_clamp: 1 }
+
+    stop_trajectory_duration: 0.5
+    state_publish_rate: 50
+    action_monitor_rate: 10

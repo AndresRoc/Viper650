@@ -1,0 +1,144 @@
+# please also refer to:
+##############################################################
+# This yaml file defines parameters for a robotic "arm".
+# The "robotic arm" is the kinematic chain
+# which is used to reach to objects and grasp or manipulate them.
+# It usually includes a gripper or hand to grasp the objects.
+#
+# Please also see documentation of class ArmComponentsNameManager
+# for more details. This .yaml file is exclusively thought
+# for this particular class instance.
+##############################################################
+
+# ``rosed arm_components_name_manager JointsTemplate.yaml``
+    # Name of the palm link. This is the link to which objects
+    # that this end effector grasps are symbolically "attached"
+    # when the object is grasped.
+    # This link should be the link directly before the gripper joints.
+    # There should be **no other movable joints between the palm link
+    # and the gripper joints**.
+    # The palm link lies between the last joint in arm_joints and
+    # before all joints in gripper_joints.
+
+viper:
+    # Name of the palm link.
+    palm_link: link_6
+    
+    # Name of the end effector link.
+    effector_link: tool0
+
+    # Names of the arm joints *without* the gripper joints.
+    arm_joints:
+        - joint_1
+        - joint_2
+        - joint_3
+        - joint_4
+        - joint_5
+        - joint_6
+
+    # All links which are in-between (and directly before and after)
+    # the arm_joints. It does however *not* include the palm_link
+    # because this is specified separately.
+    arm_links:
+        - link_1
+        - link_2
+        - link_3
+        - link_4
+        - link_5
+        - link_6
+        - tool0
+
+    # initial ("Home") pose of the arm joints. Has to be the same
+    # order as arm_joints.
+    arm_joint_init:
+        - 0.0
+        - -1.57079633
+        - 3.14159
+        - 0.0
+        - 0.0
+        - 0.0
+
+    # Maximum velocities for arm
+    arm_joint_max_vel:
+        - 0.8
+        - 0.8
+        - 0.8
+        - 0.8
+        - 0.8
+        - 0.8
+
+    # Maximum forces for arm
+    arm_joint_max_force:
+        - 10
+        - 10
+        - 10
+        - 10
+        - 10
+        - 10
+
+ 
+    # All joints of the "gripper". The gripper is the part of the
+    # arm used to grasp/grip objects. 
+    # # Essentially, they are the "finger joints".
+    # gripper_joints:
+    #     - join_6-tool0
+
+    # # initial ("Home") pose of the gripper joints. Has to be the same
+    # # order as gripper_joints.
+    # gripper_joint_init:
+    #     - 0
+
+    # # -0.0043633
+
+    # # Maximum velocities for gripper
+    # gripper_joint_max_vel:
+    #     - 0.3 
+              
+
+    # # Maximum forces for gripper
+    # gripper_joint_max_force:
+    #     - 2
+
+
+    # # All links which are in-between (and directly before and after)
+    # # the gripper_joints. It does however *not* include the palm_link
+    # # because this is specified separately.
+    # gripper_links:
+    #     - link_6
+    #     - tool0
+       
+    # Position controller names. Does not need to be specified
+    # if ArmComponentsNameManager instance is not used to read PID values
+    # Has to be in same order as arm_joints.
+    arm_position_controller_names:
+        - joint_1_position_controller
+        - joint_2_position_controller
+        - joint_3_position_controller
+        - joint_4_position_controller
+        - joint_5_position_controller
+        - joint_6_position_controller
+    
+    # Has to be in same order as arm_joints.
+    # arm_effort_controller_names:
+    
+    # Has to be in same order as gripper_joints.
+    # gripper_position_controller_names:
+    #     - joint_6-tool0_position_controller
+
+    # Velocity controller names. Does not need to be specified
+    # if ArmComponentsNameManager instance is not used to read PID values
+    # Has to be in same order as arm_joints.
+    arm_velocity_controller_names:
+        - joint_1_velocity_controller
+        - joint_2_velocity_controller
+        - joint_3_velocity_controller
+        - joint_4_velocity_controller
+        - joint_5_velocity_controller
+        - joint_6_velocity_controller
+    
+    # Has to be in same order as gripper_joints.
+    # gripper_velocity_controller_names:
+    #     - joint_6-tool0_velocity_controller
+
+    # Has to be in same order as gripper_joints.
+    # gripper_effort_controller_names:
